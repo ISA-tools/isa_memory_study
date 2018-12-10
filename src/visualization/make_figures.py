@@ -33,9 +33,9 @@ def main(input_file, output_filepath):
         fig, ax = plt.subplots()
         fig.suptitle('Disk vs. {} objects'.format(category), fontsize=12,
                      fontweight='bold')
-        print("before: ", df)
+        # print("before: ", df)
         df = df[df.category == category].reset_index()
-        print("after: ", df)
+        # print("after: ", df)
         identifiers = df['mtblsid']
         # disk_sizes = df['disk_size'] / 1024
         disk_sizes = df.disk_size / 1024
@@ -46,7 +46,7 @@ def main(input_file, output_filepath):
         ax.set_ylabel('Memory size (kb)')
         
         for i, txt in enumerate(identifiers):
-            print("label:",str(txt))
+            # print("label:",str(txt))
             # plt.text(x+0.3, y+0.3, txt, fontsize=9)
             ax.annotate(txt, (disk_sizes.loc[i], mem_sizes.loc[i]), size=10)
 
@@ -64,7 +64,7 @@ def main(input_file, output_filepath):
 
     # plot scatterplot for ISA objects only
     logger.info('Saving scatter_isa_only figures (pdf, png)')
-    fig_isa_only, _ = plot_single_category(df_max_filtered, 'CisaFrame', 'orange')
+    fig_isa_only, _ = plot_single_category(df_max_filtered, 'ISA', 'orange')
     fig_isa_only.savefig(join(output_filepath, 'scatter_isa_only.pdf'))
     fig_isa_only.savefig(join(output_filepath, 'scatter_isa_only.png'))
 
