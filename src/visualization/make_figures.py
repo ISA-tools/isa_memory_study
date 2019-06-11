@@ -34,16 +34,40 @@ def main(input_file, output_filepath):
         fig, ax = plt.subplots()
         fig.suptitle('Disk vs. {} objects'.format(category), fontsize=12,
                      fontweight='bold')
-        df = df[df.category == category]
+        # print("before: ", df)
+        df = df[df.category == category].reset_index()
+        # print("after: ", df)
+        identifiers = df['mtblsid']
+        # disk_sizes = df['disk_size'] / 1024
         disk_sizes = df.disk_size / 1024
         mem_sizes = df['size'] / 1024
+        # mem_sizes = df.size / 1024
         ax.plot(disk_sizes, mem_sizes, 'o', c=colour, alpha=0.25)
         ax.set_xlabel('Disk size (kb)')
         ax.set_ylabel('Memory size (kb)')
+        
+        for i, txt in enumerate(identifiers):
+            # print("label:",str(txt))
+            # plt.text(x+0.3, y+0.3, txt, fontsize=9)
+            ax.annotate(txt, (disk_sizes.loc[i], mem_sizes.loc[i]), size=10)
+
+        # for k, v in df.category.iterrows():
+        #     print(k,v)
+        #     ax.annotate(k, v,
+        #         xytext=(10,-5), textcoords='offset points',
+        #         family='sans-serif', fontsize=18, color='darkslategrey')
+
         return fig, ax
 
     max_disk_size = 100000
     df_max_filtered = df[df.disk_size < max_disk_size]
+    print("df_max_filtered:", df_max_filtered)
+
+    # plot scatterplot for ISA objects only
+    logger.info('Saving scatter_isa_only figures (pdf, png)')
+    fig_isa_only, _ = plot_single_category(df_max_filtered, 'ISA', 'orange')
+    fig_isa_only.savefig(join(output_filepath, 'scatter_isa_only.pdf'))
+    fig_isa_only.savefig(join(output_filepath, 'scatter_isa_only.png'))
 
     # plot scatterplot for DataFrame objects only
     logger.info('Saving scatter_df_only figures (pdf, png)')
@@ -51,11 +75,8 @@ def main(input_file, output_filepath):
     fig_df_only.savefig(join(output_filepath, 'scatter_df_only.pdf'))
     fig_df_only.savefig(join(output_filepath, 'scatter_df_only.png'))
 
-    # plot scatterplot for ISA objects only
-    logger.info('Saving scatter_isa_only figures (pdf, png)')
-    fig_isa_only, _ = plot_single_category(df_max_filtered, 'ISA', 'orange')
-    fig_isa_only.savefig(join(output_filepath, 'scatter_isa_only.pdf'))
-    fig_isa_only.savefig(join(output_filepath, 'scatter_isa_only.png'))
+
+
 
     # plot scatterplot for both categories
     max_disk_size = 100000
