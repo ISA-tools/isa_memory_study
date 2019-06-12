@@ -21,20 +21,27 @@ def main(input_file, output_file):
     disk_sizes = []
     obj_sizes = []
     categories = []
+    mtblsids = []
 
     for _, row in df.iterrows():
         disk_sizes.append(row.disk_size)
         obj_sizes.append(row.df_size)
+        mtblsids.append(row.mtblsid)
         categories.append('DataFrame')
         disk_sizes.append(row.disk_size)
         obj_sizes.append(row.isa_size)
-        categories.append('ISA')
+        mtblsids.append(row.mtblsid)
+        if '_s' in row.mtblsid:
+            categories.append('CisaFrame')
+        elif '_a' in row.mtblsid:
+            categories.append('CisaFrame')   
 
     df_by_cat = pd.DataFrame({
         'disk_size': disk_sizes,
         'size': obj_sizes,
         'log_size': np.log(obj_sizes),
-        'category': categories
+        'category': categories,
+        'mtblsid' : mtblsids
     })
 
     df_sorted = df_by_cat.sort_values(by='category')
