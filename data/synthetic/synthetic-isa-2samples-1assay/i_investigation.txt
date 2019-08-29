@@ -30,8 +30,8 @@ Investigation Person Roles
 Investigation Person Roles Term Accession Number
 Investigation Person Roles Term Source REF
 STUDY
-Study Identifier	
-Study Title	
+Study Identifier	synthetic-isa-2samples-1assay	
+Study Title	synthetic-isa-2samples-1assay	
 Study Description	
 Study Submission Date	
 Study Public Release Date	
