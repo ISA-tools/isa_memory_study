@@ -4,7 +4,7 @@ Term Source File
 Term Source Version
 Term Source Description
 INVESTIGATION
-Investigation Identifier	inv101
+Investigation Identifier	"synthetic-isa-1sample-6assays"
 Investigation Title
 Investigation Description
 Investigation Submission Date

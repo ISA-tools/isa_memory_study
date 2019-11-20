@@ -4,7 +4,7 @@ Term Source File	"http://data.bioontology.org/ontologies/OBI"
 Term Source Version	"39"
 Term Source Description	"Ontology for Biomedical Investigations"
 INVESTIGATION
-Investigation Identifier	"inv101"
+Investigation Identifier	"synthetic-isa-1sample-1assay"
 Investigation Title	""
 Investigation Description	""
 Investigation Submission Date	""
